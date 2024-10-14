@@ -15,7 +15,7 @@ const encodeBase64 = (str: string) => {
 
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
-    max: 2,
+    limit: 2,
     handler: (_req, res) => {
         res.status(429).send('Too many requests from this IP, please try again later.');
     }
@@ -31,14 +31,14 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             const name = capitalizeWords(req.body.name);
             const team = req.body.team;
             const sanitizedContact = req.body.contact.replace(/[\s-]/g, '_');
-            const encodedContact = String(encodeBase64(sanitizedContact));
+            const encodedContact = encodeBase64(sanitizedContact);
+
             const threadResponse = await axios.post(
                 `https://discord.com/api/v9/channels/${channelId}/threads`,
                 {
                     name: `New Trade Request: ${name} From ${team}`,
                     auto_archive_duration: 10080,
                     type: 11,
-                    topic: encodedContact
                 },
                 {
                     headers: {
@@ -49,6 +49,21 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             );
 
             const threadId = threadResponse.data.id;
+
+            // Update the thread topic with the encoded contact information
+            await axios.patch(
+                `https://discord.com/api/v9/channels/${threadId}`,
+                {
+                    topic: encodedContact
+                },
+                {
+                    headers: {
+                        'Authorization': `Bot ${discordBotToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
             // Send the form data as an embed to the created thread
             const embed = {
                 title: "New Trade Request",
