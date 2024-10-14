@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="container">
       <div class="box">
         <div class="top-box">
-          <p class="text">FRC 7034 Trading Form</p>
-        </div>
-        <form class="trade-form">
-          <label for="name">Name:</label>
+          <p class="text">FRC 7034 Trading Form</p>        </div>
+        <form class="trade-form">          <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
           <label for="team">Team/Affiliation: </label>
           <input type="text" id="team" name="team" required>
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   `;
 
-    // Initialize Vanta.js on the body element with subtler effect
     NET({
         el: "body",
         mouseControls: true,
@@ -85,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const tradeFor = tradeForInput.value;
         const payload = { name, team, contact, offer, tradeFor };
 
+        submitButton?.setAttribute('disabled', 'true');
+
         try {
             const response = await fetch('/api/sendWebhook', {
                 method: 'POST',
@@ -95,14 +94,29 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                new Error('Network response was not ok');
+                if (response.status === 429) {
+                    throw new Error('Too many requests. Please try again in a minute or two.');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
             }
 
             alert('Your form has been submitted, you may be contacted soon by a team member...');
             window.location.reload();
-        } catch (error) {
+        } catch (error: unknown) {
             console.error('Error:', error);
-            alert('Failed to submit form.');
+            if (error instanceof Error) {
+                if (error.message.includes('Too many requests')) {
+                    alert('You have been rate-limited. Please try again in the next minute or two.');
+                } else {
+                    alert('There was an error submitting your form. Please try again later.');
+                }
+            } else {
+                alert('An unknown error occurred. Please try again later.');
+            }
+            submitButton?.removeAttribute('disabled');
         }
     });
+
+    submitButton?.removeAttribute('disabled');
 });
