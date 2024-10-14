@@ -31,7 +31,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             const name = capitalizeWords(req.body.name);
             const team = req.body.team;
             const sanitizedContact = req.body.contact.replace(/[\s-]/g, '_');
-            const encodedContact = encodeBase64(sanitizedContact);
+            const encodedContact = String(encodeBase64(sanitizedContact));
             const threadResponse = await axios.post(
                 `https://discord.com/api/v9/channels/${channelId}/threads`,
                 {
