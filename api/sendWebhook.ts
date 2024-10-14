@@ -9,9 +9,13 @@ const capitalizeWords = (str: string) => {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 };
 
+const encodeBase64 = (str: string) => {
+    return Buffer.from(str).toString('base64');
+};
+
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
-    limit: 2,
+    max: 2,
     handler: (_req, res) => {
         res.status(429).send('Too many requests from this IP, please try again later.');
     }
@@ -27,12 +31,14 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             const name = capitalizeWords(req.body.name);
             const team = req.body.team;
             const sanitizedContact = req.body.contact.replace(/[\s-]/g, '_');
+            const encodedContact = encodeBase64(sanitizedContact);
             const threadResponse = await axios.post(
                 `https://discord.com/api/v9/channels/${channelId}/threads`,
                 {
                     name: `New Trade Request: ${name} From ${team}`,
                     auto_archive_duration: 10080,
-                    type: 11
+                    type: 11,
+                    topic: encodedContact
                 },
                 {
                     headers: {
@@ -61,7 +67,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
                             type: 2, // Button
                             style: 1, // Primary style
                             label: "Trade",
-                            custom_id: `Trading_${sanitizedContact}`
+                            custom_id: `Trading_${encodedContact}`
                         }
                     ]
                 }
@@ -82,9 +88,9 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             );
 
             res.status(200).send('Message sent');
-        } catch (error) {
+        } catch (error: unknown) {
             console.error('Error:', error);
-            res.status(500).send({ error: 'Server Error', details: error});
+            res.status(500).send({ error: 'Server Error', details: error });
         }
     });
 };
