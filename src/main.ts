@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <label for="contact">Contact Information:</label>
           <input type="text" id="contact" name="contact" required>
 
-          <label for="offer">What you want to Trade:</label>
+          <label for="offer">Trading Offer:</label>
           <input type="text" id="offer" name="offer" required>
 
-          <label for="tradeFor">What you want to trade for:</label>
+          <label for="tradeFor">Trading Request:</label>
           <input type="text" id="tradeFor" name="tradeFor" required>
 
           <button type="submit" class="submit-button" disabled>Submit</button>
