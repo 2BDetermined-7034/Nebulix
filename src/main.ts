@@ -3,14 +3,6 @@ import NET from 'vanta/dist/vanta.net.min';
 import * as THREE from 'three';
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.head.innerHTML += `
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Nebulix Trading Form">
-        <meta name="keywords" content="Nebulix, Trading Form, FRC 7034">
-        <meta name="author" content="FRC 7034 2BDetermined">
-        <title>Nebulix</title>
-    `;
 
     document.body.innerHTML = `
     <div class="container">
