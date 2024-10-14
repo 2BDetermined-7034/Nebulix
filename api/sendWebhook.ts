@@ -11,7 +11,7 @@ const capitalizeWords = (str: string) => {
 
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
-    limit: 1,
+    limit: 2,
     handler: (_req, res) => {
         res.status(429).send('Too many requests from this IP, please try again later.');
     }
