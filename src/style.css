@@ -1,0 +1,209 @@
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('./font/ethnocentric rg.otf') format('opentype');
+}
+
+body {
+  font-family: 'Ethnocentric', Arial, sans-serif;
+  background: linear-gradient(135deg, #0B3D0B, #0E4D0E);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.box {
+  background-color: rgba(30, 86, 49, 0.85);
+  width: 90%;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  animation: fadeIn 1s ease-out;
+}
+
+.top-box {
+  background-color: rgba(0, 0, 0, 0.85);
+  width: calc(100% - 20px);
+  height: auto;
+  border-radius: 16px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  animation: slideDown 0.8s ease-out;
+}
+
+.text {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.trade-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 60px;
+  box-sizing: border-box;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.trade-form label {
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding-bottom: 5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.trade-form input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #CCCCCC;
+  font-size: 1rem;
+  background-color: rgba(240, 240, 240, 0.85);
+  box-sizing: border-box;
+}
+
+.trade-form input:focus {
+  border-color: #1E5631;
+  outline: none;
+  background-color: rgba(240, 240, 240, 1);
+}
+
+.trade-form button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #308c53;
+  color: #FFFFFF;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
+  animation: fadeIn 2s ease-out;
+}
+
+.trade-form button:hover {
+  background-color: #177117;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -50px);
+  }
+  to {
+    transform: translate(-50%, 20px);
+  }
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .box {
+    padding: 20px;
+  }
+
+  .top-box {
+    width: calc(100% - 40px);
+  }
+
+  .text {
+    font-size: 1.2rem;
+  }
+
+  .trade-form {
+    max-width: 100%;
+  }
+
+  .trade-form label,
+  .trade-form input,
+  .trade-form button {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .box {
+    padding: 10px;
+  }
+
+  .top-box {
+    padding: 5px 10px;
+    width: calc(100% - 20px);
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+
+  .trade-form {
+    max-width: 100%;
+  }
+
+  .trade-form label,
+  .trade-form input,
+  .trade-form button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+/* Add styles for the submit button */
+.submit-button {
+  background-color: #1E5631;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:disabled {
+  background-color: #686868;
+  cursor: not-allowed;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #134c13;
+  transform: scale(1.05);
+}
