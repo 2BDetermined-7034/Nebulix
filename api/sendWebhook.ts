@@ -9,11 +9,12 @@ const capitalizeWords = (str: string) => {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 };
 
-// Rate limiter middleware
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    limit: 100, // Limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again later.'
+    windowMs: 60 * 1000, // 1 minute
+    limit: 1,
+    handler: (_req, res) => {
+        res.status(429).send('Too many requests from this IP, please try again later.');
+    }
 });
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
@@ -26,7 +27,6 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             const name = capitalizeWords(req.body.name);
             const team = req.body.team;
             const sanitizedContact = req.body.contact.replace(/[\s-]/g, '_');
-
             const threadResponse = await axios.post(
                 `https://discord.com/api/v9/channels/${channelId}/threads`,
                 {
@@ -43,13 +43,11 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             );
 
             const threadId = threadResponse.data.id;
-
             // Send the form data as an embed to the created thread
             const embed = {
                 title: "New Trade Request",
                 description: `
                     \`${name}\` from \`${team}\` would like to trade \`${req.body.offer}\` for \`${req.body.tradeFor}\`.
-
                     **Contact Information:** [REDACTED]
                 `,
                 color: 3447003
@@ -86,7 +84,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
             res.status(200).send('Message sent');
         } catch (error) {
             console.error('Error:', error);
-            res.status(500).send('Server Error');
+            res.status(500).send({ error: 'Server Error', details: error});
         }
     });
 };

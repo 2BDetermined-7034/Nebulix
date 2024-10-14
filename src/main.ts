@@ -12,19 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <form class="trade-form">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
-
           <label for="team">Team/Affiliation: </label>
           <input type="text" id="team" name="team" required>
-
           <label for="contact">Contact Information:</label>
           <input type="text" id="contact" name="contact" required>
-
           <label for="offer">Trading Offer:</label>
           <input type="text" id="offer" name="offer" required>
-
           <label for="tradeFor">Trading Request:</label>
           <input type="text" id="tradeFor" name="tradeFor" required>
-
           <button type="submit" class="submit-button" disabled>Submit</button>
         </form>
       </div>
@@ -88,17 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const contact = contactInput.value;
         const offer = offerInput.value;
         const tradeFor = tradeForInput.value;
-
         const payload = { name, team, contact, offer, tradeFor };
 
         try {
-            await fetch('/api/sendWebhook', {
+            const response = await fetch('/api/sendWebhook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
             });
+
+            if (!response.ok) {
+                new Error('Network response was not ok');
+            }
 
             alert('Your form has been submitted, you may be contacted soon by a team member...');
             window.location.reload();
