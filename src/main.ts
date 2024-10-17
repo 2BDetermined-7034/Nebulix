@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <input type="text" id="team" name="team" required>
           <label for="contact">Contact Information:</label>
           <input type="text" id="contact" name="contact" required>
-          <label for="offer">Trading Offer:</label>
+          <label for="offer">Trade Offer:</label>
           <input type="text" id="offer" name="offer" required>
-          <label for="tradeFor">Trading Request:</label>
+          <label for="tradeFor">Trade Request:</label>
           <input type="text" id="tradeFor" name="tradeFor" required>
           <button type="submit" class="submit-button" disabled>Submit</button>
         </form>

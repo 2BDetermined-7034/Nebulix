@@ -15,7 +15,7 @@ const encodeBase64 = (str: string) => {
 
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
-    max: 2,
+    limit: 2,
     handler: (_req, res) => {
         res.status(429).send('Too many requests from this IP, please try again later.');
     }
@@ -50,12 +50,11 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
 
             const threadId = threadResponse.data.id;
 
-            // Send the form data as an embed to the created thread
             const embed = {
                 title: "New Trade Request",
                 description: `
                     \`${name}\` from \`${team}\` would like to trade \`${req.body.offer}\` for \`${req.body.tradeFor}\`.
-                    **Contact Information:** [REDACTED]
+                    **Contact Information:** [Revealed when you claim the trade]
                 `,
                 color: 3447003,
                 footer: {
