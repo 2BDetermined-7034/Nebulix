@@ -78,7 +78,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
                 `,
                 color: 3447003,
                 footer: {
-                    text: `${encodedContact}`
+                    text: `${encodeBase64(encodedContact)}`
                 }
             };
 
