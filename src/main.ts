@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <input type="text" id="offer" name="offer" required>
           <label for="tradeFor">Trade Request:</label>
           <input type="text" id="tradeFor" name="tradeFor" required>
+<!--          <label for="image">(Optional) Image:</label>-->
+<!--          <input type="file" id="image" name="image" accept="image/*">-->
           <button type="submit" class="submit-button" disabled>Submit</button>
         </form>
       </div>
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contactInput = document.querySelector<HTMLInputElement>('#contact');
         const offerInput = document.querySelector<HTMLInputElement>('#offer');
         const tradeForInput = document.querySelector<HTMLInputElement>('#tradeFor');
+        // const imageInput = document.querySelector<HTMLInputElement>('#image');
 
         if (nameInput?.value && teamInput?.value && contactInput?.value && offerInput?.value && tradeForInput?.value) {
             submitButton?.removeAttribute('disabled');
@@ -71,8 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const contactInput = document.querySelector<HTMLInputElement>('#contact');
         const offerInput = document.querySelector<HTMLInputElement>('#offer');
         const tradeForInput = document.querySelector<HTMLInputElement>('#tradeFor');
+        // const imageInput = document.querySelector<HTMLInputElement>('#image');
 
-        if (!nameInput || !teamInput || !contactInput || !offerInput || !tradeForInput) {
+        if (!nameInput || !teamInput || !contactInput || !offerInput || !tradeForInput ) {
             console.error('One or more form elements are missing.');
             alert('Failed to submit form. Please try again.');
             return;
@@ -83,17 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const contact = contactInput.value;
         const offer = offerInput.value;
         const tradeFor = tradeForInput.value;
-        const payload = { name, team, contact, offer, tradeFor };
+        // const imageFile = imageInput.files[0];
+        const payload = new FormData();
+        payload.append('name', name);
+        payload.append('team', team);
+        payload.append('contact', contact);
+        payload.append('offer', offer);
+        payload.append('tradeFor', tradeFor);
+        // payload.append('image', imageFile);
 
         submitButton?.setAttribute('disabled', 'true');
 
         try {
             const response = await fetch('/api/sendWebhook', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+                body: payload,
             });
 
             if (!response.ok) {

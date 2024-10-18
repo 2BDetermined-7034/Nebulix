@@ -13,11 +13,18 @@ const encodeBase64 = (str: string) => {
     return Buffer.from(str).toString('base64');
 };
 
-const limiter = rateLimit({
+const getClientId = (req: VercelRequest): string | null => {
+    const clientId = req.headers['x-client-id'];
+    return typeof clientId === 'string' ? clientId : null;
+};
+
+const clientRateLimiters = new Map<string, ReturnType<typeof rateLimit>>();
+
+const createRateLimiter = () => rateLimit({
     windowMs: 60 * 1000, // 1 minute
     limit: 2,
     handler: (_req, res) => {
-        res.status(429).send('Too many requests from this IP, please try again later.');
+        res.status(429).send('Too many requests from this client, please try again later.');
     }
 });
 
@@ -25,8 +32,21 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     const discordBotToken = process.env.DISCORD_BOT_TOKEN;
     const channelId = process.env.DISCORD_CHANNEL_ID;
 
-    // Apply rate limiting
-    limiter(req, res, async () => {
+    const clientId = getClientId(req);
+    if (!clientId) {
+        return res.status(400).send('Client ID header missing');
+    }
+
+    if (!clientRateLimiters.has(clientId)) {
+        clientRateLimiters.set(clientId, createRateLimiter());
+    }
+
+    const limiter = clientRateLimiters.get(clientId);
+    if (!limiter) {
+        return res.status(500).send('Rate limiter initialization error');
+    }
+
+    limiter(req as any, res as any, async () => {
         try {
             const name = capitalizeWords(req.body.name);
             const team = req.body.team;

@@ -9,10 +9,12 @@
     "start": "vite serve"
   },
   "devDependencies": {
+    "@types/multer": "^1.4.12",
     "@types/three": "^0.169.0",
     "concurrently": "^9.0.1",
     "dotenv-webpack": "^8.1.0",
     "gh-pages": "^6.2.0",
+    "multer": "^1.4.5-lts.1",
     "three": "^0.169.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
@@ -26,6 +28,7 @@
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
     "express-rate-limit": "^7.4.1",
+    "file-type": "^19.6.0",
     "jsonwebtoken": "^9.0.2"
   }
 }

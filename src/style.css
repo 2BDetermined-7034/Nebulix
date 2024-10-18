@@ -22,18 +22,18 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 10px; /* Reduced padding */
   box-sizing: border-box;
 }
 
 .box {
   background-color: rgba(30, 86, 49, 0.85);
   width: 90%;
-  max-width: 800px;
-  padding: 30px;
-  border-radius: 16px;
+  max-width: 600px; /* Reduced max-width */
+  padding: 20px; /* Reduced padding */
+  border-radius: 12px; /* Reduced border-radius */
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Reduced shadow */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,25 +44,25 @@ body {
 
 .top-box {
   background-color: rgba(0, 0, 0, 0.85);
-  width: calc(100% - 20px);
+  width: calc(100% - 10px); /* Reduced width */
   height: auto;
-  border-radius: 16px;
+  border-radius: 12px; /* Reduced border-radius */
   position: absolute;
-  top: -10px;
+  top: -5px; /* Reduced top */
   left: 50%;
-  transform: translate(-50%, 20px);
+  transform: translate(-50%, 10px); /* Reduced transform */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 5px 10px; /* Reduced padding */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Reduced shadow */
   box-sizing: border-box;
   animation: slideDown 0.8s ease-out;
 }
 
 .text {
   color: #FFFFFF;
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Reduced font-size */
   text-align: center;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
@@ -72,42 +72,42 @@ body {
   font-family: 'Titillium Web', sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px; /* Reduced gap */
   width: 100%;
-  max-width: 500px;
-  margin-top: 60px;
+  max-width: 400px; /* Reduced max-width */
+  margin-top: 40px; /* Reduced margin-top */
   box-sizing: border-box;
   animation: fadeIn 1.5s ease-out;
-  font-size: 1.2rem; /* Increased font size */
+  font-size: 1.2rem; /* Reduced font-size */
 }
 
 .trade-form label {
   font-family: 'Titillium Web', sans-serif;
   color: #FFFFFF;
-  font-size: 1.2rem; /* Increased font size */
-  padding-bottom: 5px;
+  font-size: 1.2rem; /* Reduced font-size */
+  padding-bottom: 3px; /* Reduced padding-bottom */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .trade-form input {
   font-family: 'Titillium Web', sans-serif;
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
+  padding: 8px; /* Reduced padding */
+  margin-bottom: 10px; /* Reduced margin-bottom */
+  border-radius: 6px; /* Reduced border-radius */
   border: 1px solid #CCCCCC;
-  font-size: 1.2rem; /* Increased font size */
+  font-size: 1.2rem; /* Reduced font-size */
   background-color: rgba(240, 240, 240, 0.85);
   box-sizing: border-box;
 }
 
 .trade-form button {
   font-family: 'Titillium Web', sans-serif;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 8px; /* Reduced padding */
+  border-radius: 6px; /* Reduced border-radius */
   border: none;
   background-color: #308c53;
   color: #FFFFFF;
-  font-size: 1.2rem; /* Increased font size */
+  font-size: 1.2rem; /* Reduced font-size */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   box-sizing: border-box;
@@ -134,22 +134,21 @@ body {
     transform: translate(-50%, -50px);
   }
   to {
-    transform: translate(-50%, 20px);
+    transform: translate(-50%, 10px); /* Reduced transform */
   }
 }
 
-/* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   .box {
-    padding: 20px;
+    padding: 15px; /* Reduced padding */
   }
 
   .top-box {
-    width: calc(100% - 40px);
+    width: calc(100% - 20px); /* Reduced width */
   }
 
   .text {
-    font-size: 1.2rem;
+    font-size: 1rem; /* Reduced font-size */
   }
 
   .trade-form {
@@ -159,22 +158,22 @@ body {
   .trade-form label,
   .trade-form input,
   .trade-form button {
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Reduced font-size */
   }
 }
 
 @media (max-width: 480px) {
   .box {
-    padding: 10px;
+    padding: 5px; /* Reduced padding */
   }
 
   .top-box {
-    padding: 5px 10px;
-    width: calc(100% - 20px);
+    padding: 3px 5px; /* Reduced padding */
+    width: calc(100% - 10px); /* Reduced width */
   }
 
   .text {
-    font-size: 1rem;
+    font-size: 0.8rem; /* Reduced font-size */
   }
 
   .trade-form {
@@ -184,17 +183,16 @@ body {
   .trade-form label,
   .trade-form input,
   .trade-form button {
-    font-size: 0.8rem;
-    padding: 8px;
+    font-size: 0.6rem; /* Reduced font-size */
+    padding: 5px; /* Reduced padding */
   }
 }
 
-/* Add styles for the submit button */
 .submit-button {
   background-color: #1E5631;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 15px; /* Reduced padding */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -207,4 +205,4 @@ body {
 .submit-button:hover:not(:disabled) {
   background-color: #134c13;
   transform: scale(1.05);
-} 
+}
