@@ -69,7 +69,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
                         {
                             type: 2, // Button
                             style: 1, // Primary style
-                            label: "Trade",
+                            label: "Claim",
                             custom_id: `Trading_${encodedContact}`
                         }
                     ]
