@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
+
 @font-face {
   font-family: 'Ethnocentric';
   src: url('./font/ethnocentric rg.otf') format('opentype');
@@ -67,6 +69,7 @@ body {
 }
 
 .trade-form {
+  font-family: 'Titillium Web', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -75,38 +78,36 @@ body {
   margin-top: 60px;
   box-sizing: border-box;
   animation: fadeIn 1.5s ease-out;
+  font-size: 1.2rem; /* Increased font size */
 }
 
 .trade-form label {
+  font-family: 'Titillium Web', sans-serif;
   color: #FFFFFF;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased font size */
   padding-bottom: 5px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .trade-form input {
+  font-family: 'Titillium Web', sans-serif;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 8px;
   border: 1px solid #CCCCCC;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased font size */
   background-color: rgba(240, 240, 240, 0.85);
   box-sizing: border-box;
 }
 
-.trade-form input:focus {
-  border-color: #1E5631;
-  outline: none;
-  background-color: rgba(240, 240, 240, 1);
-}
-
 .trade-form button {
+  font-family: 'Titillium Web', sans-serif;
   padding: 12px;
   border-radius: 8px;
   border: none;
   background-color: #308c53;
   color: #FFFFFF;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased font size */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   box-sizing: border-box;
@@ -206,4 +207,4 @@ body {
 .submit-button:hover:not(:disabled) {
   background-color: #134c13;
   transform: scale(1.05);
-}
+} 
